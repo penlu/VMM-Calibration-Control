@@ -2224,19 +2224,25 @@ void MainWindow::LoadThresholds(int state){
 }
 //------------------------- Calibration Procedure -------------------------------------------
 void MainWindow::startCalibration(){
-    void delay();
+    void delay(); // wait 200 milliseconds
     bool ok;
     if(ui->calibration->isChecked()){
-      for (int t=2;t<=13;t++){//t is time?
-	  for (int g=3;g<=3;g++){//g is gain?
+        if (ui->gain->isChecked(){	//assuming we have gain and time checkboxes
+	  	    for (int g=3;g<=3;g++)	
+    
+      for (int t=2;t<=13;t++){ // t is length of timer sawtooth in units of 25 nanoseconds
+	      for (int g=3;g<=3;g++){ //g is gain, specified in arbitrary units [[WHAT GAIN IS THIS? aren't we measuring gain? reference to what Paolo said ("we're measuring the gain and pedestal of the shaping amplifier")? hell is a shaping amplifier? (evidently the real gain is not exactly the gain that we had set and we are calibrating for the difference)
                 //            if(!calibrationStop){
-                ui->sdt->setValue(250);
+                ui->sdt->setValue(250); // sdt is what
                 for(int j = 1;j<=16;j++){
-                    boardEvents[j]=0;
-                }
-                qDebug()<<"Staring Calibration";
-                ui->sg->setCurrentIndex(g);
+                    boardEvents[j]=0; // boardEvents is what
+                } // are the events just channels? (no)
+                qDebug()<<"Starting Calibration";
+                ui->sg->setCurrentIndex(g); // sg is the thingy into which a user enters gain
                 qDebug()<<"Gain:"<<ui->sg->currentText();
+                
+                // the following will contain values for some parameter of the pulse
+                // hypotheses: time differences between pulses? pulse size? what is the param?
                 int minPulser;
                 int maxPulser;
                 int stepPulser;
@@ -2249,13 +2255,16 @@ void MainWindow::startCalibration(){
                     maxPulser = 450;
                     stepPulser = 50;
                 }
+                
+                // WHERE IN ALL OF THE FOLLOWING DOES STUFF ACTUALLY HAPPEN?
                 for(int p=minPulser;p<=maxPulser;){
                     //                    if(!calibrationStop){
-                    ui->sdp_2->setValue(p);
-                    qDebug()<<"Pulser Value:"<<ui->sdp_2->value();
+                    ui->sdp_2->setValue(p); // what is sdp_2? (DAC digital-to-analog converter?) whatever it is, evidently we're just entering the parameter for the pulse the same way the user is
+                    
+                    qDebug()<<"Pulser Value:"<<ui->sdp_2->value(); // sdp_2 is "pulser value" value of what??? "test pulse DAC"
                     for(int ch=0;ch<64;ch++){
                         //                            if(!calibrationStop){
-                        for(int chT=0;chT<64;chT++){
+                        for(int chT=0;chT<64;chT++){ // pretty sure this only has to happen once, but what the heck
 //                            VMM1SM[chT]->setStyleSheet("background-color: gray");
 //                            VMM1SMBool[chT]=0;
 //                            VMM1SMBoolAll=0;
@@ -2280,6 +2289,7 @@ void MainWindow::startCalibration(){
                         VMM1ST[ch]->click();
 //                        VMM1SM[ch]->click();
 
+						// doing a bunch of setup
                         qDebug()<<"Reset Electronics";
                         emit ui->cdaq_reset->click();
                         delay();
@@ -2290,7 +2300,7 @@ void MainWindow::startCalibration(){
                         delay();
 
                         // NO NEIGHBORS
-                        qDebug()<<"Switching off neighbors";
+                        qDebug()<<"Switching off neighbors"; // what is it about neighboring channels? (electrical interference or whatever?) read up
                         ui->sng->setCurrentIndex(0);
 
                         qDebug()<<"Initialize Electronics";
@@ -2309,11 +2319,11 @@ void MainWindow::startCalibration(){
                         delay();
                         qDebug()<<"Enabling DAC";
                         ui->daqModeOutput->setCurrentIndex(1);
-                        emit ui->setDaqMode->click();
+                        emit ui->setDaqMode->click(); // DAC or DAQ? dac is digital-to-analog converter; DAQ is data acquisition.
                         delay();
                         emit ui->onACQ->click();
-                        qDebug()<<"Setting edge time to:"<<t*25+50;
-                        ui->detectionTime->setValue(t*25+50);
+                        qDebug()<<"Setting edge time to:"<<t*25+50; // this sets timing
+                        ui->detectionTime->setValue(t*25+50); // setting length of timer sawtooth
                         ui->detectionMode->setCurrentIndex(1);
                         ui->edgeSelection->setCurrentIndex(0);
                         delay();
@@ -2324,32 +2334,34 @@ void MainWindow::startCalibration(){
                         delay();
 
                         QString commandsSentStartPointStr = ui->cmdlabel->text();
-                        ui->startDi->click();
+                        ui->startDi->click(); // startDi is the button to start pulsing
 
                         if(ui->stopTriggerCnt == QObject::sender())
                             break;
-                        for(int b=1;b<=16;b++) boardEvents[b]=0;
+                        for(int b=1;b<=16;b++) boardEvents[b]=0; // this is happening again? what the fuck (so boardEvents is changed somewhere in the fucked up tangle morasss of bullshit macro key pressing that is occurring above)
 
-                        while(ui->calibration->isChecked()){
+                        while(ui->calibration->isChecked()){ // evidently you can kill the calibration routine at any time by unchecking
                             //                                    if(!calibrationStop){
                             bool stop=10;
-                            for(int b=1;b<=ui->numbersOfFecs->value();b++){
+                            for(int b=1;b<=ui->numbersOfFecs->value();b++){ // what's a fec
                                 if(boardEvents[b]<eventsForCalibration){
                                     QString currStr = ui->cmdlabel->text();
+                                    // condition: "stop entering"? correlate with the inappropriate greek below
                                     if(currStr.toInt(&ok,10)-commandsSentStartPointStr.toInt(&ok,10)  > eventsForCalibration){//(ui->setVMMs->currentIndex()-1)*eventsForCalibration){
-                                        qDebug()<< "Mpike na to Stamatisei";
-                                        emit ui->stopDi->click();
+                                        qDebug()<< "Mpike na to Stamatisei"; // GREEK IS NOT OKAY
+                                        // for the record this is "μπηκε να το σταματησει" -> "BIKE to stop" but apparently mpike is enter so stop entering
+                                        emit ui->stopDi->click(); // stop pulsing
                                         delay();
                                         emit ui->cdaq_reset->click();
                                         delay();
-                                        stop = 1;
+                                        stop = 1; // I guess we're stopping then (this results in an outer loop break)
                                         break;
                                     } else {
                                         delay();
                                         stop = 0;
                                     }
                                 }else if(boardEvents[b]>=eventsForCalibration ) {
-                                    qDebug()<< "Ta mazepse";
+                                    qDebug()<< "Ta mazepse"; // GREEK IS NOT OKAY
                                     emit ui->stopDi->click();
                                     delay();
                                     emit ui->cdaq_reset->click();
