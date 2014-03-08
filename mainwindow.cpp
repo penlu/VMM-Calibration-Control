@@ -2226,19 +2226,49 @@ void MainWindow::LoadThresholds(int state){
 void MainWindow::startCalibration(){
     void delay(); // wait 200 milliseconds
     bool ok;
-    if(ui->calibration->isChecked()){
-        if (ui->gain->isChecked(){	//assuming we have gain and time checkboxes
-	  	    for (int g=3;g<=3;g++)	
+    if(ui->calibration->isChecked()) {
+        if (ui->gain->isChecked() {	// assuming we have gain and time checkboxes
+	  	    for (int g = 0; g < 3; g++) {
+	  	    	// set the value of gain using implicit values in combo box (0 -> 0.5, 1 -> 1.0, 2 -> 3.0, 3 -> 9.0 (mV/fC))
+    			ui->sg->setCurrentIndex(g); 
+    			// must check if this is the only thing we must do to set gain
+    			
+    			// reset boardEvents (?)
+    			for (int j = 1; j <= 16; j++) {
+    				boardEvents[j] = 0;
+    			}
+    			
+    			// calibrate on various pulser DAC values (controls total pulse charge)
+    			for (int p = 250; p <= 400; p += 50) {
+    				// set pulse total charge
+    				ui->sdp_2->setValue(p);    				
+    				
+    				// calibrate all channels
+    				for (int ch = 0; ch < 64; ch++) {
+    					// reset checkbox values
+    					for (int box = 0; box < 64; box++) {
+    						
+    					}
+    				}
+    			}
+    			
+    			
+    			
+    			// instruct VMM to give us data
+    			
+    		}
+    	}
+    	
     
+    			
       for (int t=2;t<=13;t++){ // t is length of timer sawtooth in units of 25 nanoseconds
 	      for (int g=3;g<=3;g++){ //g is gain, specified in arbitrary units [[WHAT GAIN IS THIS? aren't we measuring gain? reference to what Paolo said ("we're measuring the gain and pedestal of the shaping amplifier")? hell is a shaping amplifier? (evidently the real gain is not exactly the gain that we had set and we are calibrating for the difference)
-                //            if(!calibrationStop){
                 ui->sdt->setValue(250); // sdt is what
                 for(int j = 1;j<=16;j++){
                     boardEvents[j]=0; // boardEvents is what
                 } // are the events just channels? (no)
                 qDebug()<<"Starting Calibration";
-                ui->sg->setCurrentIndex(g); // sg is the thingy into which a user enters gain
+                ui->sg->setCurrentIndex(g); // sg is the thingy into which a user enters gain (setting DAC)
                 qDebug()<<"Gain:"<<ui->sg->currentText();
                 
                 // the following will contain values for some parameter of the pulse
@@ -2247,7 +2277,7 @@ void MainWindow::startCalibration(){
                 int maxPulser;
                 int stepPulser;
                 if(g==2){
-                    minPulser = 350;
+                    minPulser = 350; 
                     maxPulser = 950;
                     stepPulser = 50;
                 }else{
