@@ -2279,8 +2279,8 @@ void MainWindow::LoadThresholds(int state) {
     }
 }
 
-// method that runs a calibration run for given parameters of time (ns), gain (mV/fC)
-void MainWindow::doCalibrationRun(int t, int g) {
+// method that runs a calibration run for given parameters of time (TAC ramp length ns), gain (conversion factor mV/fC), pulse size (total charge fC)
+void MainWindow::doCalibrationRun(int t, int g, int p) {
     // set the value of gain using implicit values in combo box (0 -> 0.5, 1 -> 1.0, 2 -> 3.0, 3 -> 9.0 (mV/fC))
     ui->sg->setCurrentIndex(g);
     // must check if this is the only thing we must do to set gain
@@ -2290,116 +2290,113 @@ void MainWindow::doCalibrationRun(int t, int g) {
         boardEvents[j] = 0;
     }
 
-    // calibrate on various pulser DAC values (controls total pulse charge)
-    for (int p = 250; p <= 400; p += 50) {
-        // set pulse total charge
-        ui->sdp_2->setValue(p);
+    // set pulse total charge
+    ui->sdp_2->setValue(p);
 
-        // calibrate all channels
-        for (int ch = 0; ch < 64; ch++) {
-            // reset checkbox values
-            for (int box = 0; box < 64; box++) {
-                VMM1ST[chT]->setStyleSheet("background-color: gray");
-                VMM1STBool[chT] = 0;
-                VMM1STBoolAll = 0;
-                VMM1STBoolAll2 = 0;
-            }
+    // calibrate all channels
+    for (int ch = 0; ch < 64; ch++) {
+        // reset checkbox values
+        for (int box = 0; box < 64; box++) {
+            VMM1ST[chT]->setStyleSheet("background-color: gray");
+            VMM1STBool[chT] = 0;
+            VMM1STBoolAll = 0;
+            VMM1STBoolAll2 = 0;
         }
+    }
 
-        // reset electronics
-        emit ui->cdaq_reset->click();
-        delay();
+    // reset electronics
+    emit ui->cdaq_reset->click();
+    delay();
 
-        // set header (on packets???)
-        emit ui->setHeaderPB->click();
-        delay();
-        emit ui->setHeaderPB->click();
-        delay();
+    // set header (on packets???)
+    emit ui->setHeaderPB->click();
+    delay();
+    emit ui->setHeaderPB->click();
+    delay();
 
-        // switch off neighbors to reduce electrical interference
-        ui->sng->setCurrentIndex(0);
+    // switch off neighbors to reduce electrical interference
+    ui->sng->setCurrentIndex(0);
 
-        // set electronics configuration
-        emit ui->SendConfiguration->click();
-        delay();
-        emit ui->SendConfiguration->click();
-        delay();
+    // set electronics configuration
+    emit ui->SendConfiguration->click();
+    delay();
+    emit ui->SendConfiguration->click();
+    delay();
 
-        // ???
-        qDebug() << "Applying Sampling";
-        ui->sampleValue->setCurrentIndex(2);
-        emit ui->sampleSetPB->click();
-        delay();
+    // ???
+    qDebug() << "Applying Sampling";
+    ui->sampleValue->setCurrentIndex(2);
+    emit ui->sampleSetPB->click();
+    delay();
 
-        // ???
-        qDebug() << "Enabling DAC";
-        ui->daqModeOutput->setCurrentIndex(1);
-        emit ui->setDaqMode->click(); // DAC or DAQ? dac is digital-to-analog converter; DAQ is data acquisition.
-        delay();
-        emit ui->onACQ->click();
+    // ???
+    qDebug() << "Enabling DAC";
+    ui->daqModeOutput->setCurrentIndex(1);
+    emit ui->setDaqMode->click(); // DAC or DAQ? dac is digital-to-analog converter; DAQ is data acquisition.
+    delay();
+    emit ui->onACQ->click();
 
-        // set timing (length of timer sawtooth)
-        ui->detectionTime->setValue(t * 25 + 50); // t is hardcoded
-        ui->detectionMode->setCurrentIndex(1);
-        ui->edgeSelection->setCurrentIndex(0);
-        delay();
+    // set timing (length of timer sawtooth)
+    ui->detectionTime->setValue(t * 25 + 50); // t is hardcoded
+    ui->detectionMode->setCurrentIndex(1);
+    ui->edgeSelection->setCurrentIndex(0);
+    delay();
 
-        // ???
-        qDebug() << "Apply detection Mode, trigger & ACQ";
-        emit ui->applyDetectionMode->click();
+    // ???
+    qDebug() << "Apply detection Mode, trigger & ACQ";
+    emit ui->applyDetectionMode->click();
 
-        // select number of events to gather for calibration
-        int eventsForCalibration = 100;
-        delay();
+    // select number of events to gather for calibration
+    int eventsForCalibration = 100;
+    delay();
 
-        // ???
-        QString commandsSentStartPointStr = ui->cmdlabel->text();
+    // ???
+    QString commandsSentStartPointStr = ui->cmdlabel->text();
 
-        // get data
-        ui->startDi->click();
+    // get data
+    ui->startDi->click();
 
-        // stop calibration condition what is??
-        if (ui->stopTriggerCnt == QObject::sender())
-            break;
-        // reset boardEvents again (?))
-        for (int b = 1; b <= 16; b++) boardEvents[b] = 0;
+    // stop calibration condition what is??
+    if (ui->stopTriggerCnt == QObject::sender())
+        break;
+    // reset boardEvents again (?))
+    for (int b = 1; b <= 16; b++) boardEvents[b] = 0;
 
-        // not sure what this piece of code does but included just in case
-        while (ui->calibration->isChecked()) { // evidently you can kill the calibration routine at any time by unchecking
-            bool stop = 10;
-            for (int b = 1; b <= ui->numbersOfFecs->value(); b++) { // what's a fec
-                if (boardEvents[b] < eventsForCalibration) {
-                    QString currStr = ui->cmdlabel->text();
-                    // condition: "stop entering"? correlate with the inappropriate greek below
-                    if (currStr.toInt(&ok, 10) - commandsSentStartPointStr.toInt(&ok, 10) > eventsForCalibration) {//(ui->setVMMs->currentIndex()-1)*eventsForCalibration){
-                        qDebug() << "Mpike na to Stamatisei"; // GREEK IS NOT OKAY
-                        // for the record this is "μπηκε να το σταματησει" -> "BIKE to stop" but apparently mpike is enter so stop entering
-                        emit ui->stopDi->click(); // stop pulsing
-                        delay();
-                        emit ui->cdaq_reset->click();
-                        delay();
-                        stop = 1; // I guess we're stopping then (this results in an outer loop break)
-                        break;
-                    } else {
-                        delay();
-                        stop = 0;
-                    }
-                } else if (boardEvents[b] >= eventsForCalibration) {
-                    qDebug() << "Ta mazepse"; // GREEK IS NOT OKAY
-                    emit ui->stopDi->click();
+    // not sure what this piece of code does but included just in case
+    while (ui->calibration->isChecked()) { // evidently you can kill the calibration routine at any time by unchecking
+        bool stop = 10;
+        for (int b = 1; b <= ui->numbersOfFecs->value(); b++) { // what's a fec
+            if (boardEvents[b] < eventsForCalibration) {
+                QString currStr = ui->cmdlabel->text();
+                // condition: "stop entering"? correlate with the inappropriate greek below
+                if (currStr.toInt(&ok, 10) - commandsSentStartPointStr.toInt(&ok, 10) > eventsForCalibration) {//(ui->setVMMs->currentIndex()-1)*eventsForCalibration){
+                    qDebug() << "Mpike na to Stamatisei"; // GREEK IS NOT OKAY
+                    // for the record this is "μπηκε να το σταματησει" -> "BIKE to stop" but apparently mpike is enter so stop entering
+                    emit ui->stopDi->click(); // stop pulsing
                     delay();
                     emit ui->cdaq_reset->click();
                     delay();
-                    stop = 1;
+                    stop = 1; // I guess we're stopping then (this results in an outer loop break)
                     break;
+                } else {
+                    delay();
+                    stop = 0;
                 }
-            }
-
-            if (stop) break;
-            qDebug() << "Waiting for Event Collecting";
-            if (ui->stopTriggerCnt == QObject::sender())
+            } else if (boardEvents[b] >= eventsForCalibration) {
+                qDebug() << "Ta mazepse"; // GREEK IS NOT OKAY
+                emit ui->stopDi->click();
+                delay();
+                emit ui->cdaq_reset->click();
+                delay();
+                stop = 1;
                 break;
+            }
         }
+
+        if (stop) break;
+        qDebug() << "Waiting for Event Collecting";
+        if (ui->stopTriggerCnt == QObject::sender())
+            break;
     }
 }
 
@@ -2411,11 +2408,15 @@ void MainWindow::startCalibration() {
     if (ui->calibration->isChecked()) {
         if (ui->gain->isChecked()) { // assuming we have gain and time checkboxes
             for (int g = 0; g < 3; g++) {
-                doCalibrationRun(2, g); // 2 for now, pick better value later??
+                // calibrate on various pulser DAC values (controls total pulse charge)
+                for (int p = 250; p <= 400; p += 50) {
+                    doCalibrationRun(2, g, p); // 2 for now, pick better value later??
+                }
             }
         } else if (ui->time->isChecked()) {
+            // loop over TAC ramp lengths
             for (int t = 2; t < 13; t += 2) {
-                doCalibrationRun(t, 0); // 0 for now, pick better value later??
+                doCalibrationRun(t, 0, 300); // 0, 300 for now, pick better value later??
             }
         }
     }
