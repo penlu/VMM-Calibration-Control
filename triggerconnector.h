@@ -1,4 +1,6 @@
 #ifndef TRIGGERCONNECTOR_H
+
+
 #define TRIGGERCONNECTOR_H
 
 #include <QObject>
