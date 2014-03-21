@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Wed Feb 12 15:37:22 2014
+** Created: Fri Mar 21 11:04:20 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      47,   14, // methods
+      48,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -78,6 +78,7 @@ static const uint qt_meta_data_MainWindow[] = {
     1020,   11,   11,   11, 0x0a,
     1050,   11,   11,   11, 0x0a,
     1065,  364,   11,   11, 0x0a,
+    1088, 1085,   11,   11, 0x0a,
 
        0        // eod
 };
@@ -112,6 +113,7 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "SetChambersMapping()\0selectWorkingDirectory()\0"
     "startCalibration()\0loadCalibrationConstants(int)\0"
     "HandleRecipe()\0LoadThresholds(int)\0"
+    ",,\0doCalibrationRun(int,int,int)\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -196,9 +198,10 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 44: loadCalibrationConstants((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 45: HandleRecipe(); break;
         case 46: LoadThresholds((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 47: doCalibrationRun((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
         default: ;
         }
-        _id -= 47;
+        _id -= 48;
     }
     return _id;
 }

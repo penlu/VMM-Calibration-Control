@@ -2279,8 +2279,20 @@ void MainWindow::LoadThresholds(int state) {
     }
 }
 
+//--------------------------------------------------------------------
+
+void delay() {
+    QTime dieTime = QTime::currentTime().addMSecs(200); //.addSecs(1);
+
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+
+//--------------------------------------------------------------------
+
 // method that runs a calibration run for given parameters of time (TAC ramp length ns), gain (conversion factor mV/fC), pulse size (total charge fC)
 void MainWindow::doCalibrationRun(int t, int g, int p) {
+  bool ok;
     // set the value of gain using implicit values in combo box (0 -> 0.5, 1 -> 1.0, 2 -> 3.0, 3 -> 9.0 (mV/fC))
     ui->sg->setCurrentIndex(g);
     // must check if this is the only thing we must do to set gain
@@ -2296,13 +2308,13 @@ void MainWindow::doCalibrationRun(int t, int g, int p) {
     // calibrate all channels
     for (int ch = 0; ch < 64; ch++) {
         // reset checkbox values
-        for (int box = 0; box < 64; box++) {
+        for (int chT = 0; chT < 64; chT++) {
             VMM1ST[chT]->setStyleSheet("background-color: gray");
             VMM1STBool[chT] = 0;
             VMM1STBoolAll = 0;
             VMM1STBoolAll2 = 0;
         }
-    }
+	//}
 
     // reset electronics
     emit ui->cdaq_reset->click();
@@ -2399,24 +2411,25 @@ void MainWindow::doCalibrationRun(int t, int g, int p) {
             break;
     }
 }
+}
 
 //------------------------- Calibration Procedure -------------------------------------------
 
 void MainWindow::startCalibration() {
-    void delay(); // wait 200 milliseconds
-    bool ok;
+    delay(); // wait 200 milliseconds
+    //bool ok;//moved to doCalibrationRun
     if (ui->calibration->isChecked()) {
-        if (ui->gain->isChecked()) { // assuming we have gain and time checkboxes
+      if (1) {//TEMP HACK TO CHECK COMPILATION ui->gain->isChecked()) { // assuming we have gain and time checkboxes
             for (int g = 0; g < 3; g++) {
                 // calibrate on various pulser DAC values (controls total pulse charge)
-                for (int p = 250; p <= 400; p += 50) {
+                for (int p = 250; p <= 500; p += 50) {
                     doCalibrationRun(2, g, p); // 2 for now, pick better value later??
                 }
             }
-        } else if (ui->time->isChecked()) {
+      } else if (0){// TEMP HACK SEE AT IF ABOVE ui->time->isChecked()) {
             // loop over TAC ramp lengths
-            for (int t = 2; t < 13; t += 2) {
-                doCalibrationRun(t, 0, 300); // 0, 300 for now, pick better value later??
+            for (int t = 2; t < 13; t += 4) {
+                doCalibrationRun(t, 3, 400); // 0, 300 for now, pick better value later??
             }
         }
     }
@@ -2426,13 +2439,12 @@ void MainWindow::startCalibration() {
 }
 
 //--------------------------------------------------------------------
-
-void delay() {
-    QTime dieTime = QTime::currentTime().addMSecs(200); //.addSecs(1);
-
-    while (QTime::currentTime() < dieTime)
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-}
+//void delay() {
+//    QTime dieTime = QTime::currentTime().addMSecs(200); //.addSecs(1);
+//
+//    while (QTime::currentTime() < dieTime)
+//        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+//}
 //--------------------------------------------------------------------
 
 void delayMs() {

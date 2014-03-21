@@ -264,6 +264,7 @@ public slots:
     void loadCalibrationConstants(int);
     void HandleRecipe();
     void LoadThresholds(int state);
+    void doCalibrationRun(int, int, int);
 };
 
 
