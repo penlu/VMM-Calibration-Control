@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed Feb 12 18:03:41 2014
+** Created: Fri Mar 21 12:29:47 2014
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -197,7 +197,8 @@ public:
     QGroupBox *calibRunSettings;
     QFrame *frameCalib2;
     QHBoxLayout *horizontalLayout_calibRun;
-    QCheckBox *doCalibRun;
+    QCheckBox *calibTime;
+    QCheckBox *calibGain;
     QGroupBox *groupBox_8;
     QWidget *layoutWidget_3;
     QHBoxLayout *horizontalLayout_18;
@@ -1118,11 +1119,17 @@ public:
         horizontalLayout_calibRun->setSpacing(6);
         horizontalLayout_calibRun->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_calibRun->setObjectName(QString::fromUtf8("horizontalLayout_calibRun"));
-        doCalibRun = new QCheckBox(calibRunSettings);
-        doCalibRun->setObjectName(QString::fromUtf8("doCalibRun"));
-        doCalibRun->setGeometry(QRect(10, 0, 190, 90));
+        calibTime = new QCheckBox(calibRunSettings);
+        calibTime->setObjectName(QString::fromUtf8("calibTime"));
+        calibTime->setGeometry(QRect(10, 0, 190, 90));
 
-        horizontalLayout_calibRun->addWidget(doCalibRun);
+        horizontalLayout_calibRun->addWidget(calibTime);
+
+        calibGain = new QCheckBox(calibRunSettings);
+        calibGain->setObjectName(QString::fromUtf8("calibGain"));
+        calibGain->setGeometry(QRect(200, 0, 190, 90));
+
+        horizontalLayout_calibRun->addWidget(calibGain);
 
         groupBox_8 = new QGroupBox(centralWidget);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
@@ -1604,9 +1611,13 @@ public:
         abovePed->setToolTip(QApplication::translate("MainWindow", "abovePed for thresholds (in mV)", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         calibRunSettings->setTitle(QApplication::translate("MainWindow", "Settings for taking calibration data", 0, QApplication::UnicodeUTF8));
-        doCalibRun->setText(QApplication::translate("MainWindow", "Do calib run", 0, QApplication::UnicodeUTF8));
+        calibTime->setText(QApplication::translate("MainWindow", "Time calib", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        doCalibRun->setToolTip(QApplication::translate("MainWindow", "Do automated loop over gains,timing to record data for calibration", 0, QApplication::UnicodeUTF8));
+        calibTime->setToolTip(QApplication::translate("MainWindow", "Do automated loop over timing to record data for calibration", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        calibGain->setText(QApplication::translate("MainWindow", "Gain calib", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        calibGain->setToolTip(QApplication::translate("MainWindow", "Do automated loop over gains to record data for calibration", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         groupBox_8->setTitle(QApplication::translate("MainWindow", "Trigger FPGA", 0, QApplication::UnicodeUTF8));
         ip1_tr->setText(QApplication::translate("MainWindow", "10", 0, QApplication::UnicodeUTF8));

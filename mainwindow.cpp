@@ -1727,7 +1727,8 @@ void MainWindow::triggerHandler() {//hugh: this is where root file is made
         if (ui->calibration->isChecked()) {
             //startCalibration();//hugh: should disable this line
         }
-        if (ui->doCalibRun->isChecked()) {
+        if (ui->calibGain->isChecked() || ui->calibTime->isChecked()) {
+	  //ui->doCalibRun->isChecked()) {
             // added by hugh skottowe 20140212
             startCalibration();
         }
@@ -2316,6 +2317,8 @@ void MainWindow::doCalibrationRun(int t, int g, int p) {
         }
 	//}
 
+	VMM1ST[ch]->click();
+
     // reset electronics
     emit ui->cdaq_reset->click();
     delay();
@@ -2419,14 +2422,14 @@ void MainWindow::startCalibration() {
     delay(); // wait 200 milliseconds
     //bool ok;//moved to doCalibrationRun
     if (ui->calibration->isChecked()) {
-      if (1) {//TEMP HACK TO CHECK COMPILATION ui->gain->isChecked()) { // assuming we have gain and time checkboxes
+      if (ui->calibGain->isChecked()) { 
             for (int g = 0; g < 3; g++) {
                 // calibrate on various pulser DAC values (controls total pulse charge)
                 for (int p = 250; p <= 500; p += 50) {
                     doCalibrationRun(2, g, p); // 2 for now, pick better value later??
                 }
             }
-      } else if (0){// TEMP HACK SEE AT IF ABOVE ui->time->isChecked()) {
+      } else if (ui->calibTime->isChecked()) {
             // loop over TAC ramp lengths
             for (int t = 2; t < 13; t += 4) {
                 doCalibrationRun(t, 3, 400); // 0, 300 for now, pick better value later??

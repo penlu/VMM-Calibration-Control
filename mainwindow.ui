@@ -2927,13 +2927,22 @@ p, li { white-space: pre-wrap; }
     </widget>
  <layout class="QHBoxLayout" name="horizontalLayout_calibRun">
   <item>
-   <widget class="QCheckBox" name="doCalibRun">
+   <widget class="QCheckBox" name="calibTime">
     <property name="geometry">
      <rect><x>10</x><y>0</y><width>190</width><height>90</height></rect>
     </property>
-    <property name="text"><string>Do calib run</string></property>
-    <property name="toolTip"><string>Do automated loop over gains,timing to record data for calibration</string></property>
+    <property name="text"><string>Time calib</string></property>
+    <property name="toolTip"><string>Do automated loop over timing to record data for calibration</string></property>
    </widget>
+</item>
+<item>
+   <widget class="QCheckBox" name="calibGain">
+     <property name="geometry">
+       <rect><x>200</x><y>0</y><width>190</width><height>90</height></rect>
+     </property>
+     <property name="text"><string>Gain calib</string></property>
+    <property name="toolTip"><string>Do automated loop over gains to record data for calibration</string></property>
+   </widget> 
    <!-- widget for number of time steps (2-13?) -->
        <!-- each t has this done: t*25+50 -->
    <!-- widget for number of gain steps (1,2,3?) -->
