@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Fri Mar 21 12:30:13 2014
+** Created: Tue Apr 15 13:46:24 2014
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      48,   14, // methods
+      49,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -46,39 +46,40 @@ static const uint qt_meta_data_MainWindow[] = {
      162,   11,   11,   11, 0x0a,
      189,  183,   11,   11, 0x0a,
      228,  216,   11,   11, 0x0a,
-     247,  216,   11,   11, 0x0a,
-     282,  270,   11,   11, 0x0a,
-     341,  336,  325,   11, 0x0a,
-     370,  364,   11,   11, 0x0a,
-     388,  364,   11,   11, 0x0a,
-     421,  413,  409,   11, 0x0a,
-     448,   11,   11,   11, 0x0a,
-     467,   11,   11,   11, 0x0a,
-     490,   11,   11,   11, 0x0a,
-     504,   11,   11,   11, 0x0a,
-     561,  528,  520,   11, 0x0a,
-     606,  594,  520,   11, 0x0a,
-     625,   11,   11,   11, 0x0a,
-     656,   11,   11,   11, 0x0a,
-     677,   11,   11,   11, 0x0a,
-     690,   11,   11,   11, 0x0a,
-     706,   11,   11,   11, 0x0a,
-     723,   11,   11,   11, 0x0a,
-     740,   11,   11,   11, 0x0a,
-     774,  762,   11,   11, 0x0a,
-     803,  797,   11,   11, 0x0a,
-     823,   11,   11,   11, 0x0a,
-     843,   11,   11,   11, 0x0a,
-     861,   11,   11,   11, 0x0a,
-     900,  894,  879,   11, 0x0a,
-     924,  894,  879,   11, 0x0a,
-     955,   11,   11,   11, 0x0a,
-     976,   11,   11,   11, 0x0a,
-    1001,   11,   11,   11, 0x0a,
-    1020,   11,   11,   11, 0x0a,
+     247,   11,   11,   11, 0x0a,
+     277,  216,   11,   11, 0x0a,
+     312,  300,   11,   11, 0x0a,
+     371,  366,  355,   11, 0x0a,
+     400,  394,   11,   11, 0x0a,
+     418,  394,   11,   11, 0x0a,
+     451,  443,  439,   11, 0x0a,
+     478,   11,   11,   11, 0x0a,
+     497,   11,   11,   11, 0x0a,
+     520,   11,   11,   11, 0x0a,
+     534,   11,   11,   11, 0x0a,
+     591,  558,  550,   11, 0x0a,
+     636,  624,  550,   11, 0x0a,
+     655,   11,   11,   11, 0x0a,
+     686,   11,   11,   11, 0x0a,
+     707,   11,   11,   11, 0x0a,
+     720,   11,   11,   11, 0x0a,
+     736,   11,   11,   11, 0x0a,
+     753,   11,   11,   11, 0x0a,
+     770,   11,   11,   11, 0x0a,
+     804,  792,   11,   11, 0x0a,
+     833,  827,   11,   11, 0x0a,
+     853,   11,   11,   11, 0x0a,
+     873,   11,   11,   11, 0x0a,
+     891,   11,   11,   11, 0x0a,
+     930,  924,  909,   11, 0x0a,
+     954,  924,  909,   11, 0x0a,
+     985,   11,   11,   11, 0x0a,
+    1006,   11,   11,   11, 0x0a,
+    1031,   11,   11,   11, 0x0a,
     1050,   11,   11,   11, 0x0a,
-    1065,  364,   11,   11, 0x0a,
-    1088, 1085,   11,   11, 0x0a,
+    1080,   11,   11,   11, 0x0a,
+    1095,  394,   11,   11, 0x0a,
+    1118, 1115,   11,   11, 0x0a,
 
        0        // eod
 };
@@ -91,6 +92,7 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "Merger()\0MergerFPGA()\0updateChannelState()\0"
     "index\0updateChannelVoltages(int)\0"
     "blockOfData\0Sender(QByteArray)\0"
+    "SendVector(std::vector<uint>)\0"
     "SenderFPGA(QByteArray)\0socketError\0"
     "displayError(QAbstractSocket::SocketError)\0"
     "QByteArray\0bits\0bitsToBytes(QBitArray)\0"
@@ -160,48 +162,49 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 12: updateChannelState(); break;
         case 13: updateChannelVoltages((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 14: Sender((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
-        case 15: SenderFPGA((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
-        case 16: displayError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
-        case 17: { QByteArray _r = bitsToBytes((*reinterpret_cast< QBitArray(*)>(_a[1])));
+        case 15: SendVector((*reinterpret_cast< std::vector<uint>(*)>(_a[1]))); break;
+        case 16: SenderFPGA((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
+        case 17: displayError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
+        case 18: { QByteArray _r = bitsToBytes((*reinterpret_cast< QBitArray(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QByteArray*>(_a[0]) = _r; }  break;
-        case 18: hideChannels((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 19: showDebugScreen((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 20: { int _r = packageHandler((*reinterpret_cast< QByteArray(*)>(_a[1])));
+        case 19: hideChannels((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: showDebugScreen((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 21: { int _r = packageHandler((*reinterpret_cast< QByteArray(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 21: clearDebugScreen(); break;
-        case 22: customCommandHandler(); break;
-        case 23: downloadSPI(); break;
-        case 24: UpdateCounter(); break;
-        case 25: { quint32 _r = ValueToReplace((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3])));
+        case 22: clearDebugScreen(); break;
+        case 23: customCommandHandler(); break;
+        case 24: downloadSPI(); break;
+        case 25: UpdateCounter(); break;
+        case 26: { quint32 _r = ValueToReplace((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< quint32*>(_a[0]) = _r; }  break;
-        case 26: { quint32 _r = reverse32((*reinterpret_cast< QString(*)>(_a[1])));
+        case 27: { quint32 _r = reverse32((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< quint32*>(_a[0]) = _r; }  break;
-        case 27: customCommandWithoutResponse(); break;
-        case 28: constructHeader((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 29: sendDis((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 30: threadHandler(); break;
-        case 31: triggerHandler(); break;
-        case 32: dataDAQPending(); break;
-        case 33: triggerHandler_fpga(); break;
-        case 34: writeFPGAFile((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 35: changeDACtoMVs((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 36: openMonitoring((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 37: initializePlots(); break;
-        case 38: updateCanvas((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 39: { vector<double> _r = bytesTobits((*reinterpret_cast< QByteArray(*)>(_a[1])));
+        case 28: customCommandWithoutResponse(); break;
+        case 29: constructHeader((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 30: sendDis((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 31: threadHandler(); break;
+        case 32: triggerHandler(); break;
+        case 33: dataDAQPending(); break;
+        case 34: triggerHandler_fpga(); break;
+        case 35: writeFPGAFile((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 36: changeDACtoMVs((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 37: openMonitoring((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 38: initializePlots(); break;
+        case 39: updateCanvas((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 40: { vector<double> _r = bytesTobits((*reinterpret_cast< QByteArray(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< vector<double>*>(_a[0]) = _r; }  break;
-        case 40: { vector<double> _r = bytesTobitsTrigger((*reinterpret_cast< QByteArray(*)>(_a[1])));
+        case 41: { vector<double> _r = bytesTobitsTrigger((*reinterpret_cast< QByteArray(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< vector<double>*>(_a[0]) = _r; }  break;
-        case 41: SetChambersMapping(); break;
-        case 42: selectWorkingDirectory(); break;
-        case 43: startCalibration(); break;
-        case 44: loadCalibrationConstants((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 45: HandleRecipe(); break;
-        case 46: LoadThresholds((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 47: doCalibrationRun((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 42: SetChambersMapping(); break;
+        case 43: selectWorkingDirectory(); break;
+        case 44: startCalibration(); break;
+        case 45: loadCalibrationConstants((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 46: HandleRecipe(); break;
+        case 47: LoadThresholds((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 48: doCalibrationRun((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
         default: ;
         }
-        _id -= 48;
+        _id -= 49;
     }
     return _id;
 }

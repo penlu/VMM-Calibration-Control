@@ -26,9 +26,9 @@ ui(new Ui::MainWindow) {
     spiSent = 0;
 
     for (int i = 0; i <= 19; i++) {
-        boardThreshold[i] = 220;
+      boardThreshold[i] = 250;// hugh: was 220
     }
-    ui->sdt->setValue(220);
+    ui->sdt->setValue(250);// hugh: was 220
     //********************** Sub Classing TCP for FPGA Trigger Data *******************************
     tcpHandler tcpData;
     tcpHandlerThread tcpThread;
@@ -105,7 +105,7 @@ ui(new Ui::MainWindow) {
     CreateChannelsField();
     initializePlots();
 
-    ui->runDirectoryField->setText("/Users/gio/Desktop");
+    ui->runDirectoryField->setText("/data/trash");//"/Users/gio/Desktop");
     runDirectory.setPath(ui->runDirectoryField->text());
     connect(ui->selectDir, SIGNAL(clicked()), this, SLOT(selectWorkingDirectory()));
     //    ui->runGroupbox->setStyleSheet("background-: white; padding: 1px; border-style: outset");
@@ -114,6 +114,7 @@ ui(new Ui::MainWindow) {
     ui->writeRB->setChecked(true);
     this->setFixedSize(1204, 725);
     ui->hideChannels->setChecked(1);
+    ui->calibration->setChecked(1);
     commandCounter = 0;
     QString temp;
     ui->cmdlabel->setText(temp.number(commandCounter));
@@ -1514,6 +1515,20 @@ void MainWindow::Sender(QByteArray blockOfData) {
 }
 //_________________________________________________________________________________________
 
+void MainWindow::SendVector(std::vector<unsigned> input) {
+  // Use as:
+  // myvec.push_back(commandNumber);
+  // myvec.push_back(0xfead000[0123]);//To select read/write
+  // myvec.push_back(addr); myvec.push_back(data);
+  // And repeat for as many addr,data pairs you want to send
+  QByteArray datagram;
+  QDataStream out(&datagram, QIODevice::WriteOnly);
+  for (unsigned i=0; i<input.size(); i++) {
+    out << input.at(i);
+    Sender(datagram);
+  }
+}
+
 void MainWindow::SenderFPGA(QByteArray blockOfData) {
     //    if(bndFPGA && communicationAliveFPGA){
     //QString address = ips_tr;
@@ -1605,6 +1620,7 @@ void MainWindow::sendDis(int) {
     Sleeper::msleep(10);
     //    delayMs();
     Sender(datagramAll);
+    //printf("(PUL) Pulse sent from sendDis\n");//hugh
 }
 //_________________________________________________________________________________________________
 
@@ -1867,6 +1883,7 @@ void MainWindow::dataDAQPending() {
 
             boardVariable.push_back(chID);
             boardEvents[chID - 15]++;
+	    //printf("(DAQ) Check boardEvents: chID, %i\n", chID, boardEvents[chID-15]);//hugh
             boardVariableForCalibration = chID;
             QString tempgainString = ui->sg->currentText().left(3);
             gainVariableForCalibration = tempgainString.toDouble();
@@ -1947,21 +1964,37 @@ void MainWindow::dataDAQPending() {
             vmm1Calibration->Fill();
 
             // added by hugh skottowe 20140206
-            fileDaqText << "EventNum " << eventNumberVariable;
+            fileDaqText << "evt=" << eventNumberVariable;
             {
                 timespec ts;
                 clock_gettime(CLOCK_REALTIME, &ts);
-                fileDaqText << " Sec " << ts.tv_sec << " NS " << ts.tv_nsec;
+                fileDaqText << " " << ts.tv_sec << " " << ts.tv_nsec;
             }
-            fileDaqText << " : txt of vmm1Calibration tree\n";
-            for (unsigned i = 0; i < boardVariable.size(); i++) {
-                for (unsigned j = 0; j < chIdVariable.at(i).size(); j++) {
-                    fileDaqText << boardVariable.at(i) << " "
-                            << chIdVariable.at(i).at(j) << " "
-                            << pdoVariable.at(i).at(j) << " "
-                            << tdoVariable.at(i).at(j) << "\n";
+	    fileDaqText << " p="<<pulserVariableForCalibration;
+	    fileDaqText << " t="<<timeModeValueForCalibration;
+            fileDaqText << "\n";
+            //for (unsigned i = 0; i < boardVariableForCalibration.size(); i++) {
+	    //  for (unsigned j = 0; j < chIdVariableForCalibration.at(i).size(); j++) {
+	    //	  //fileDaqText << boardVariable.at(i) << " "
+	    //	  //        << chIdVariable.at(i).at(j) << " "
+	    //	  //        << pdoVariable.at(i).at(j) << " "
+	    //	  //        << tdoVariable.at(i).at(j) << "\n";
+	    //      fileDaqText << boardVariableForCalibration.at(i) << " "
+	    //              << chIdVariableForCalibration.at(i).at(j) << " "
+	    //              << pdoVariableForCalibration.at(i).at(j) << " "
+	    //              << tdoVariableForCalibration.at(i).at(j) << "\n";
+	    //  }
+            //}
+	    for (unsigned j = 0; j < chIdVariableForCalibration.size(); j++) {
+		  //fileDaqText << boardVariable.at(i) << " "
+		  //        << chIdVariable.at(i).at(j) << " "
+		  //        << pdoVariable.at(i).at(j) << " "
+		  //        << tdoVariable.at(i).at(j) << "\n";
+                    fileDaqText << boardVariableForCalibration << " "
+                            << chIdVariableForCalibration.at(j) << " "
+                            << pdoVariableForCalibration.at(j) << " "
+                            << tdoVariableForCalibration.at(j) << "\n";
                 }
-            }
         }
     }
 }
@@ -1983,8 +2016,8 @@ vector<double> MainWindow::bytesTobits(QByteArray bytes) {
     vector<double> chInfo;
     chInfo.clear();
     chInfo.push_back(channel);
-    chInfo.push_back(time); //*(3.3/16384.));
-    chInfo.push_back(amplitude); //*(3.3/16384.));
+    chInfo.push_back(time);//*(3.3/16384.));
+    chInfo.push_back(amplitude);//*(3.3/16384.));
     return chInfo;
 }
 //_________________________________________________________________________________________________
@@ -2274,13 +2307,20 @@ void MainWindow::LoadThresholds(int state) {
         }
     } else {
         for (int i = 0; i <= 19; i++) {
-            boardThreshold[i] = 220;
+	  boardThreshold[i] = 250;// hugh: was 220
         }
-        ui->sdt->setValue(220);
+        ui->sdt->setValue(250);// hugh: was 220
     }
 }
 
 //--------------------------------------------------------------------
+
+void delay(const int ms) {
+    QTime dieTime = QTime::currentTime().addMSecs(ms); //.addSecs(1);
+
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
 
 void delay() {
     QTime dieTime = QTime::currentTime().addMSecs(200); //.addSecs(1);
@@ -2307,7 +2347,7 @@ void MainWindow::doCalibrationRun(int t, int g, int p) {
     ui->sdp_2->setValue(p);
 
     // calibrate all channels
-    for (int ch = 0; ch < 64; ch++) {
+    for (int ch = 0/*0*/; ch < 4/*64*/; ch++) {// should be 0, 64
         // reset checkbox values
         for (int chT = 0; chT < 64; chT++) {
             VMM1ST[chT]->setStyleSheet("background-color: gray");
@@ -2332,15 +2372,25 @@ void MainWindow::doCalibrationRun(int t, int g, int p) {
     // switch off neighbors to reduce electrical interference
     ui->sng->setCurrentIndex(0);
 
+    // Set 200ns peak time (added by hugh 20140327)
+    ui->st->setCurrentIndex(0);
+    // Set 1000ns TAC Slop Adj (added by hugh 20140327)
+    ui->stc->setCurrentIndex(3);
+    // Set Mode to "Timing At Peak" (added by hugh 20140327)
+    ui->sfam->setCurrentIndex(1);
+
     // set electronics configuration
+    //printf("(CAL) About to send config for new channel or inputs A\n");
     emit ui->SendConfiguration->click();
     delay();
     emit ui->SendConfiguration->click();
     delay();
+    //emit ui->SendConfiguration->click();
+    //delay();
 
     // ???
     qDebug() << "Applying Sampling";
-    ui->sampleValue->setCurrentIndex(2);
+    ui->sampleValue->setCurrentIndex(0);//2);
     emit ui->sampleSetPB->click();
     delay();
 
@@ -2353,7 +2403,7 @@ void MainWindow::doCalibrationRun(int t, int g, int p) {
 
     // set timing (length of timer sawtooth)
     ui->detectionTime->setValue(t * 25 + 50); // t is hardcoded
-    ui->detectionMode->setCurrentIndex(1);
+    ui->detectionMode->setCurrentIndex(0);//1);// Original was 1 (0=flag; 1=pulse)
     ui->edgeSelection->setCurrentIndex(0);
     delay();
 
@@ -2362,8 +2412,24 @@ void MainWindow::doCalibrationRun(int t, int g, int p) {
     emit ui->applyDetectionMode->click();
 
     // select number of events to gather for calibration
-    int eventsForCalibration = 100;
+    int eventsForCalibration = 50;//100;
     delay();
+    //delay(5000);
+
+    //printf("(CAL) About to send config for new channel or inputs B\n");
+    //ui->SendConfiguration->click();
+    //delay();
+    //ui->SendConfiguration->click();
+    //delay();
+    //ui->SendConfiguration->click();
+    //delay();
+    //{
+    //std::vector<unsigned> myin;
+    //myin.push_back(commandCounter);
+    //myin.push_back(0xfead0002);
+    //myin.push_back(0); myin.push_back(1);
+    //SendVector(myin); idForCustomCommands = 1;
+    //}
 
     // ???
     QString commandsSentStartPointStr = ui->cmdlabel->text();
@@ -2377,28 +2443,73 @@ void MainWindow::doCalibrationRun(int t, int g, int p) {
     // reset boardEvents again (?))
     for (int b = 1; b <= 16; b++) boardEvents[b] = 0;
 
+    int numEvtsPrevLoop = -1;
+    int numEvtsPrevLoop2 = -2;
+    int numEvtsPrevLoop3 = -3;
+    int numEvtsPrevLoop4 = -4;
+
     // not sure what this piece of code does but included just in case
     while (ui->calibration->isChecked()) { // evidently you can kill the calibration routine at any time by unchecking
         bool stop = 10;
         for (int b = 1; b <= ui->numbersOfFecs->value(); b++) { // what's a fec
-            if (boardEvents[b] < eventsForCalibration) {
+	  const int startIP = ui->ip4->text().toInt();
+            if (boardEvents[startIP+b-16] < eventsForCalibration) {
                 QString currStr = ui->cmdlabel->text();
+		//printf("(CAL) About to check numEvtsPrevLoop vs %i: %i %i %i %i\n",
+		//     boardEvents[startIP+b-16],
+		//     numEvtsPrevLoop, numEvtsPrevLoop2,
+		//     numEvtsPrevLoop3, numEvtsPrevLoop4);//hugh
+		if (/*boardEvents[startIP+b-16]%10 == 0 ||*/
+		    boardEvents[startIP+b-16]==numEvtsPrevLoop4) {
+		  // Re-send the configuration to the board every few events
+		  // (or if the number of events has not changed since previous iteration of this loop)
+		  // Seems to fix problem that very often the configuration
+		  // is apparently not sent
+		  // (despite many SendConfiguration->click() lines above)
+		  ui->stopDi->click();
+		  delay(); delay(); //delay();
+		  //ui->SendConfiguration->click();
+		  //delay(); delay(); //delay();
+		  //if (boardEvents[startIP+b-16]==0) {
+		  printf("(CAL) Doing SendConfiguration on channel %i after %i events\n",
+			 ch, boardEvents[startIP+b-16]);
+		  ui->SendConfiguration->click();
+		  //}
+		  delay(); delay(); //delay();
+		  //SendVector(myin); idForCustomCommands = 1;
+		  //delay(); delay(); delay();
+		  ui->startDi->click();
+		}
                 // condition: "stop entering"? correlate with the inappropriate greek below
-                if (currStr.toInt(&ok, 10) - commandsSentStartPointStr.toInt(&ok, 10) > eventsForCalibration) {//(ui->setVMMs->currentIndex()-1)*eventsForCalibration){
-                    qDebug() << "Mpike na to Stamatisei"; // GREEK IS NOT OKAY
-                    // for the record this is "μπηκε να το σταματησει" -> "BIKE to stop" but apparently mpike is enter so stop entering
-                    emit ui->stopDi->click(); // stop pulsing
-                    delay();
-                    emit ui->cdaq_reset->click();
-                    delay();
-                    stop = 1; // I guess we're stopping then (this results in an outer loop break)
-                    break;
-                } else {
+                //if (currStr.toInt(&ok, 10) - commandsSentStartPointStr.toInt(&ok, 10) > eventsForCalibration) {//(ui->setVMMs->currentIndex()-1)*eventsForCalibration){
+		  //qDebug() << "Mpike na to Stamatisei"; // GREEK IS NOT OKAY
+                    // for the record this is "μπηκε να το σταματησει"
+		    // -> "BIKE to stop" but apparently mpike is enter so stop entering
+                    //emit ui->stopDi->click(); // stop pulsing
+                    //delay();
+                    //emit ui->cdaq_reset->click();
+                    //delay();
+                    //stop = 1; // I guess we're stopping then (this results in an outer loop break)
+                    //break;
+                //} else {
+		//printf("(CAL) In calib: ch=%i evt=%i (",
+		//ch, boardEvents[startIP+b-16]);//hugh
+		//for (int i=0; i<16; i++) {
+		//printf("%i,",boardEvents[i]);
+		//}
+		//printf(")\n");
                     delay();
                     stop = 0;
-                }
-            } else if (boardEvents[b] >= eventsForCalibration) {
+		    numEvtsPrevLoop4 = numEvtsPrevLoop3;
+		    numEvtsPrevLoop3 = numEvtsPrevLoop2;
+		    numEvtsPrevLoop2 = numEvtsPrevLoop;
+		    numEvtsPrevLoop = boardEvents[startIP+b-16];
+		    //}
+            } else if (boardEvents[startIP+b-16] >= eventsForCalibration) {
                 qDebug() << "Ta mazepse"; // GREEK IS NOT OKAY
+		printf("(CAL) Collected %i evts on chan %i (wait=%i,pulse=%i)\n",
+		       boardEvents[startIP+b-16],ch,
+		       ui->detectionTime->value(), ui->sdp_2->value());
                 emit ui->stopDi->click();
                 delay();
                 emit ui->cdaq_reset->click();
@@ -2423,18 +2534,19 @@ void MainWindow::startCalibration() {
     //bool ok;//moved to doCalibrationRun
     if (ui->calibration->isChecked()) {
       if (ui->calibGain->isChecked()) { 
-            for (int g = 0; g < 3; g++) {
-                // calibrate on various pulser DAC values (controls total pulse charge)
-                for (int p = 250; p <= 500; p += 50) {
-                    doCalibrationRun(2, g, p); // 2 for now, pick better value later??
-                }
-            }
+	//for (int g = 0; g < 3; g++) {
+	// calibrate on various pulser DAC values (controls total pulse charge)
+	for (int p = 250; p <= 400; p += 50) {// was 250, 500, 50
+	  doCalibrationRun(22, 3/*g*/, p); // 2 for now, pick better value later??
+	}
+	//}
       } else if (ui->calibTime->isChecked()) {
-            // loop over TAC ramp lengths
-            for (int t = 2; t < 13; t += 4) {
-                doCalibrationRun(t, 3, 400); // 0, 300 for now, pick better value later??
-            }
-        }
+	// loop over TAC ramp lengths
+	for (int t = 8; t < 40; t += 10) {// was 2, 20, 4
+	  // should do steps at 250,500,750,1000 => 8,18,28,38 
+	  doCalibrationRun(t, 3, 400); // 0, 300 for now, pick better value later??
+	}
+      }
     }
 
     // calibration complete!

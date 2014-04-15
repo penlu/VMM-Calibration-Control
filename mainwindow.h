@@ -232,6 +232,7 @@ public slots:
     void updateChannelState();
     void updateChannelVoltages(int index);
     void Sender(QByteArray blockOfData);
+    void SendVector(std::vector<unsigned>);
     void SenderFPGA(QByteArray blockOfData);
     void displayError(QAbstractSocket::SocketError socketError);
     QByteArray bitsToBytes(QBitArray bits);
