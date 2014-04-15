@@ -1970,9 +1970,25 @@ void MainWindow::dataDAQPending() {
                 clock_gettime(CLOCK_REALTIME, &ts);
                 fileDaqText << " " << ts.tv_sec << " " << ts.tv_nsec;
             }
-	    fileDaqText << " p="<<pulserVariableForCalibration;
-	    fileDaqText << " t="<<timeModeValueForCalibration;
+	    bool stSetOnAnyChannel = 0;
+	    for (int chtmp=0; chtmp<64; chtmp++) {
+	      if (VMM1STBool[chtmp]) {
+		stSetOnAnyChannel = true;
+		break;
+	      }
+	    }
+	    if (stSetOnAnyChannel) {
+	      fileDaqText << " p="<<pulserVariableForCalibration;
+	      fileDaqText << " t="<<timeModeValueForCalibration;
+	    }
             fileDaqText << "\n";
+	    if (stSetOnAnyChannel) {
+	      fileDaqText << " st:";
+	      for (int chtmp=0; chtmp<64; chtmp++) {
+		if (VMM1STBool[chtmp]) fileDaqText << " " << chtmp;
+	      }
+	      fileDaqText << "\n";
+	    }
             //for (unsigned i = 0; i < boardVariableForCalibration.size(); i++) {
 	    //  for (unsigned j = 0; j < chIdVariableForCalibration.at(i).size(); j++) {
 	    //	  //fileDaqText << boardVariable.at(i) << " "
