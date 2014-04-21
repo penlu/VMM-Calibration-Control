@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>thresholds_qt.txt</file>
-        <file>boardCalibConstants_qt.txt</file>
-    </qresource>
-</RCC>

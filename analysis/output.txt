@@ -1,0 +1,257 @@
+/c/root/bin/root-config: line 415: test: command: integer expression expected
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__Net: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__IO: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__Hist: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__Graf: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__G3D: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__GPad: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__Tree: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__Thread: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__Rint: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__PostScript: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__Matrix: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__Physics: Invalid argument
+cc1plus.exe: c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../include/c++/3.4.5/:_G__cpp_setupG__Gui1: Invalid argument
+In file included from vmm1Calibration.C:4:
+vmm1Calibration.h:12:19: TROOT.h: No such file or directory
+vmm1Calibration.h:13:20: TChain.h: No such file or directory
+vmm1Calibration.h:14:19: TFile.h: No such file or directory
+In file included from vmm1Calibration.C:4:
+vmm1Calibration.h:18: error: ISO C++ forbids declaration of `TTree' with no type
+vmm1Calibration.h:18: error: expected `;' before '*' token
+vmm1Calibration.h:19: error: `Int_t' does not name a type
+vmm1Calibration.h:22: error: `UInt_t' does not name a type
+vmm1Calibration.h:23: error: `Double_t' does not name a type
+vmm1Calibration.h:24: error: `UInt_t' does not name a type
+vmm1Calibration.h:29: error: `UInt_t' does not name a type
+vmm1Calibration.h:32: error: ISO C++ forbids declaration of `TBranch' with no type
+vmm1Calibration.h:32: error: expected `;' before '*' token
+vmm1Calibration.h:33: error: ISO C++ forbids declaration of `TBranch' with no type
+vmm1Calibration.h:33: error: expected `;' before '*' token
+vmm1Calibration.h:34: error: ISO C++ forbids declaration of `TBranch' with no type
+vmm1Calibration.h:34: error: expected `;' before '*' token
+vmm1Calibration.h:35: error: ISO C++ forbids declaration of `TBranch' with no type
+vmm1Calibration.h:35: error: expected `;' before '*' token
+vmm1Calibration.h:36: error: ISO C++ forbids declaration of `TBranch' with no type
+vmm1Calibration.h:36: error: expected `;' before '*' token
+vmm1Calibration.h:37: error: ISO C++ forbids declaration of `TBranch' with no type
+vmm1Calibration.h:37: error: expected `;' before '*' token
+vmm1Calibration.h:38: error: ISO C++ forbids declaration of `TBranch' with no type
+vmm1Calibration.h:38: error: expected `;' before '*' token
+vmm1Calibration.h:39: error: ISO C++ forbids declaration of `TBranch' with no type
+vmm1Calibration.h:39: error: expected `;' before '*' token
+vmm1Calibration.h:41: error: expected `)' before '*' token
+vmm1Calibration.h:43: error: `Int_t' does not name a type
+vmm1Calibration.h:44: error: `Int_t' does not name a type
+vmm1Calibration.h:45: error: `Long64_t' does not name a type
+vmm1Calibration.h:46: error: `TTree' has not been declared
+vmm1Calibration.h:46: error: ISO C++ forbids declaration of `tree' with no type
+vmm1Calibration.h:48: error: `Bool_t' does not name a type
+vmm1Calibration.h:49: error: `Long64_t' has not been declared
+vmm1Calibration.h:49: error: ISO C++ forbids declaration of `entry' with no type
+vmm1Calibration.h:55: error: expected `)' before '*' token
+vmm1Calibration.h: In destructor `virtual vmm1Calibration::~vmm1Calibration()':
+vmm1Calibration.h:72: error: `fChain' was not declared in this scope
+vmm1Calibration.h:72: warning: unused variable 'fChain'
+vmm1Calibration.h:73: error: `fChain' was not declared in this scope
+vmm1Calibration.h:73: warning: unused variable 'fChain'
+vmm1Calibration.h: At global scope:
+vmm1Calibration.h:76: error: `Int_t' does not name a type
+vmm1Calibration.h:82: error: `Long64_t' does not name a type
+vmm1Calibration.h:97: error: variable or field `Init' declared void
+vmm1Calibration.h:97: error: `int vmm1Calibration::Init' is not a static member of `class vmm1Calibration'
+vmm1Calibration.h:97: error: `TTree' was not declared in this scope
+vmm1Calibration.h:97: error: `tree' was not declared in this scope
+vmm1Calibration.h:98: error: expected `,' or `;' before '{' token
+vmm1Calibration.h:129: error: `Bool_t' does not name a type
+vmm1Calibration.h:140: error: variable or field `Show' declared void
+vmm1Calibration.h:140: error: `int vmm1Calibration::Show' is not a static member of `class vmm1Calibration'
+vmm1Calibration.h:140: error: `Long64_t' was not declared in this scope
+vmm1Calibration.h:141: error: expected `,' or `;' before '{' token
+vmm1Calibration.h:147: error: `Int_t' does not name a type
+vmm1Calibration.C:5:17: TH2.h: No such file or directory
+vmm1Calibration.C:6:20: TStyle.h: No such file or directory
+vmm1Calibration.C:7:21: TCanvas.h: No such file or directory
+vmm1Calibration.C:8:20: TGraph.h: No such file or directory
+vmm1Calibration.C:9:19: TMath.h: No such file or directory
+vmm1Calibration.C:10:17: TF1.h: No such file or directory
+vmm1Calibration.C:11:23: TPaveText.h: No such file or directory
+vmm1Calibration.C:12:21: TLegend.h: No such file or directory
+vmm1Calibration.C: In function `int getMyColor(int)':
+vmm1Calibration.C:23: error: `kBlack' was not declared in this scope
+vmm1Calibration.C:23: warning: unused variable 'kBlack'
+vmm1Calibration.C:24: error: `kRed' was not declared in this scope
+vmm1Calibration.C:24: warning: unused variable 'kRed'
+vmm1Calibration.C:25: error: `kGreen' was not declared in this scope
+vmm1Calibration.C:25: warning: unused variable 'kGreen'
+vmm1Calibration.C:26: error: `kBlue' was not declared in this scope
+vmm1Calibration.C:26: warning: unused variable 'kBlue'
+vmm1Calibration.C:27: error: `kMagenta' was not declared in this scope
+vmm1Calibration.C:27: warning: unused variable 'kMagenta'
+vmm1Calibration.C:28: error: `kCyan' was not declared in this scope
+vmm1Calibration.C:28: warning: unused variable 'kCyan'
+vmm1Calibration.C:29: error: `kOrange' was not declared in this scope
+vmm1Calibration.C:29: warning: unused variable 'kOrange'
+vmm1Calibration.C:30: error: `kGray' was not declared in this scope
+vmm1Calibration.C:30: warning: unused variable 'kGray'
+vmm1Calibration.C:31: error: `kBlack' was not declared in this scope
+vmm1Calibration.C:31: warning: unused variable 'kBlack'
+vmm1Calibration.C: In function `int main(int, const char* const*)':
+vmm1Calibration.C:84: error: `TTree' was not declared in this scope
+vmm1Calibration.C:84: error: `t' was not declared in this scope
+vmm1Calibration.C:90: error: `TFile' was not declared in this scope
+vmm1Calibration.C:90: error: `f' was not declared in this scope
+vmm1Calibration.C:90: error: `TFile' is not a class or namespace
+vmm1Calibration.C:90: error: `Open' was not declared in this scope
+vmm1Calibration.C:92: error: expected primary-expression before ')' token
+vmm1Calibration.C:92: error: expected `;' before "gDirectory"
+vmm1Calibration.C:90: warning: unused variable 'TFile'
+vmm1Calibration.C:90: warning: unused variable 'Open'
+vmm1Calibration.C: In member function `virtual void vmm1Calibration::Loop()':
+vmm1Calibration.C:133: error: `fChain' was not declared in this scope
+vmm1Calibration.C:133: warning: unused variable 'fChain'
+vmm1Calibration.C:135: error: `Long64_t' does not name a type
+vmm1Calibration.C:136: error: `nentries' was not declared in this scope
+vmm1Calibration.C:183: error: `Long64_t' was not declared in this scope
+vmm1Calibration.C:183: error: expected `;' before "nbytes"
+vmm1Calibration.C:184: error: expected `;' before "jentry"
+vmm1Calibration.C:184: error: `jentry' was not declared in this scope
+vmm1Calibration.C:185: error: expected `;' before "ientry"
+vmm1Calibration.C:186: error: `ientry' was not declared in this scope
+vmm1Calibration.C:186: warning: unused variable 'ientry'
+vmm1Calibration.C:187: error: `nb' was not declared in this scope
+vmm1Calibration.C:187: error: `fChain' was not declared in this scope
+vmm1Calibration.C:187: error: `nbytes' was not declared in this scope
+vmm1Calibration.C:191: error: `pulser' was not declared in this scope
+vmm1Calibration.C:192: error: `gain' was not declared in this scope
+vmm1Calibration.C:193: error: `timeMode' was not declared in this scope
+vmm1Calibration.C:198: warning: converting to `int' from `double'
+vmm1Calibration.C:204: error: `pulser' was not declared in this scope
+vmm1Calibration.C:205: error: `timeMode' was not declared in this scope
+vmm1Calibration.C:204: warning: unused variable 'pulser'
+vmm1Calibration.C:205: warning: unused variable 'timeMode'
+vmm1Calibration.C:218: error: `pulser' was not declared in this scope
+vmm1Calibration.C:218: warning: unused variable 'pulser'
+vmm1Calibration.C:226: error: `gain' was not declared in this scope
+vmm1Calibration.C:226: error: `timeMode' was not declared in this scope
+vmm1Calibration.C:226: warning: unused variable 'gain'
+vmm1Calibration.C:226: warning: unused variable 'timeMode'
+vmm1Calibration.C:244: error: `pulser' was not declared in this scope
+vmm1Calibration.C:245: error: `gain' was not declared in this scope
+vmm1Calibration.C:246: error: `timeMode' was not declared in this scope
+vmm1Calibration.C:271: error: `TMath' has not been declared
+vmm1Calibration.C:271: error: `Sqrt' was not declared in this scope
+vmm1Calibration.C:271: warning: unused variable 'Sqrt'
+vmm1Calibration.C:278: error: `TMath' has not been declared
+vmm1Calibration.C:278: error: `Sqrt' was not declared in this scope
+vmm1Calibration.C:278: warning: unused variable 'Sqrt'
+vmm1Calibration.C:310: error: `TMath' has not been declared
+vmm1Calibration.C:310: error: `Sqrt' was not declared in this scope
+vmm1Calibration.C:310: warning: unused variable 'Sqrt'
+vmm1Calibration.C:318: error: `TMath' has not been declared
+vmm1Calibration.C:318: error: `Sqrt' was not declared in this scope
+vmm1Calibration.C:318: warning: unused variable 'Sqrt'
+vmm1Calibration.C:244: warning: unused variable 'pulser'
+vmm1Calibration.C:245: warning: unused variable 'gain'
+vmm1Calibration.C:246: warning: unused variable 'timeMode'
+vmm1Calibration.C:334: error: `pulser' was not declared in this scope
+vmm1Calibration.C:335: error: `gain' was not declared in this scope
+vmm1Calibration.C:336: error: `timeMode' was not declared in this scope
+vmm1Calibration.C:337: warning: converting to `int' from `double'
+vmm1Calibration.C:187: warning: unused variable 'fChain'
+vmm1Calibration.C:187: warning: unused variable 'nbytes'
+vmm1Calibration.C:334: warning: unused variable 'pulser'
+vmm1Calibration.C:335: warning: unused variable 'gain'
+vmm1Calibration.C:336: warning: unused variable 'timeMode'
+vmm1Calibration.C:343: error: `TCanvas' was not declared in this scope
+vmm1Calibration.C:343: error: `c1' was not declared in this scope
+vmm1Calibration.C:343: error: `TCanvas' is not a type
+vmm1Calibration.C:345: error: `kWhite' was not declared in this scope
+vmm1Calibration.C:380: error: `TGraph' was not declared in this scope
+vmm1Calibration.C:380: error: template argument 1 is invalid
+vmm1Calibration.C:380: error: template argument 2 is invalid
+vmm1Calibration.C:380: error: invalid type in declaration before ';' token
+vmm1Calibration.C:381: error: request for member `push_back' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:389: warning: converting to `int' from `float'
+vmm1Calibration.C:389: warning: converting to `int' from `float'
+vmm1Calibration.C:390: error: `g' was not declared in this scope
+vmm1Calibration.C:390: error: `TGraph' is not a type
+vmm1Calibration.C:391: error: `Form' was not declared in this scope
+vmm1Calibration.C:392: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:391: warning: unused variable 'Form'
+vmm1Calibration.C:398: error: `TLegend' was not declared in this scope
+vmm1Calibration.C:398: error: `myleg1' was not declared in this scope
+vmm1Calibration.C:398: error: `TLegend' is not a type
+vmm1Calibration.C:399: error: `myleg2' was not declared in this scope
+vmm1Calibration.C:399: error: `TLegend' is not a type
+vmm1Calibration.C:400: error: `myleg3' was not declared in this scope
+vmm1Calibration.C:400: error: `TLegend' is not a type
+vmm1Calibration.C:408: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:410: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:411: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:412: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:413: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:414: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:416: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:418: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:418: error: `Form' was not declared in this scope
+vmm1Calibration.C:418: warning: unused variable 'Form'
+vmm1Calibration.C:420: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:420: error: `Form' was not declared in this scope
+vmm1Calibration.C:420: warning: unused variable 'Form'
+vmm1Calibration.C:422: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:422: error: `Form' was not declared in this scope
+vmm1Calibration.C:422: warning: unused variable 'Form'
+vmm1Calibration.C:431: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:435: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:442: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:443: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:444: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:445: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:447: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:448: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:449: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:451: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:452: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:453: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:455: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:458: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:460: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:460: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:465: error: `Form' was not declared in this scope
+vmm1Calibration.C:471: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:472: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:473: error: `TF1' was not declared in this scope
+vmm1Calibration.C:473: error: `myfit' was not declared in this scope
+vmm1Calibration.C:473: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:473: warning: unused variable 'TF1'
+vmm1Calibration.C:486: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:487: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:488: error: `TF1' was not declared in this scope
+vmm1Calibration.C:488: error: `myfit' was not declared in this scope
+vmm1Calibration.C:488: error: request for member `at' in `myGraphs', which is of non-class type `int'
+vmm1Calibration.C:492: error: `TPaveText' was not declared in this scope
+vmm1Calibration.C:492: error: `t' was not declared in this scope
+vmm1Calibration.C:492: error: `TPaveText' is not a type
+vmm1Calibration.C:488: warning: unused variable 'TF1'
+vmm1Calibration.C:492: warning: unused variable 'TPaveText'
+vmm1Calibration.C:343: warning: unused variable 'TCanvas'
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libGui.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libCore.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libCint.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libRIO.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libNet.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libHist.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libGraf.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libGraf3d.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libGpad.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libTree.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libRint.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libPostscript.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libMatrix.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libPhysics.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libMathCore.lib': Invalid argument
+g++.exe: 'C:\MinGW\MSYS\1.0\cygdrive\c\root\lib\libThread.lib': Invalid argument
+g++.exe: unrecognized option `-GR'
+g++.exe: unrecognized option `-GX'
+g++.exe: unrecognized option `-G5'
